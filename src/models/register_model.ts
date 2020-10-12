@@ -10,11 +10,10 @@ const registerSchema = new Schema({
    matricula: {
        type: String,
        required: true,
-       unique: true,
    },
    codigo: {
        type: String,
-       unique: true,
+       required: true,
    },
     paciente: {
        type: String,
@@ -28,7 +27,6 @@ const registerSchema = new Schema({
     numero_patronal: {
         type: String,
         required: true,
-        unique: true,
     },
     recetas: {
         type: Number,
