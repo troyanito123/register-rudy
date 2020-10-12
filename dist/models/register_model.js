@@ -13,11 +13,10 @@ var registerSchema = new mongoose_1.Schema({
     matricula: {
         type: String,
         required: true,
-        unique: true,
     },
     codigo: {
         type: String,
-        unique: true,
+        required: true,
     },
     paciente: {
         type: String,
@@ -31,7 +30,6 @@ var registerSchema = new mongoose_1.Schema({
     numero_patronal: {
         type: String,
         required: true,
-        unique: true,
     },
     recetas: {
         type: Number,
