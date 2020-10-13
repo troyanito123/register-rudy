@@ -30,12 +30,15 @@ const registerSchema = new Schema({
     },
     recetas: {
         type: Number,
+        default: 0,
     },
     labs: {
         type: Number,
+        default: 0,
     },
     rx: {
         type: Number,
+        default: 0,
     },
     consultorio: {
         required: true,
@@ -60,6 +63,7 @@ interface IRegister extends Document{
 registerSchema.pre<IRegister>('save', function (next) {
     const user = this;
     user.matricula = user.matricula.toUpperCase();
+    user.codigo = user.codigo.toUpperCase();
     user.paciente = user.paciente.toUpperCase();
     user.empresa = user.empresa.toUpperCase();
     user.numero_patronal = user.numero_patronal.toUpperCase();
