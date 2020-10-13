@@ -34,6 +34,22 @@ export const getAll = async (req: Request, res: Response) => {
     }
 }
 
+export const getOne = async (req: Request, res: Response) => {
+    let id = req.params.id;
+    try {
+        let data = await Register.findById(id).exec();
+        res.json({
+            ok: true,
+            data
+        });
+    }catch (error) {
+        res.status(400).json({
+            ok: false,
+            error
+        });
+    }
+}
+
 export const update = async (req: Request, res: Response) =>{
     let id = req.params.id;
     let body = _.pick(req.body, 'matricula', 'codigo', 'paciente', 'empresa', 'numero_patronal', 'recetas', 'labs', 'rx', 'consultorio');

@@ -5,6 +5,7 @@ var register_controller_1 = require("../controllers/register_controller");
 var router = express_1.Router();
 router.get('/', register_controller_1.getAll);
 router.post('/', register_controller_1.create);
+router.get('/:id', register_controller_1.getOne);
 router.put('/:id', register_controller_1.update);
 router.delete('/:id', register_controller_1.remove);
 router.get('/search/:term', register_controller_1.search);

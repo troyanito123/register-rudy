@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.search = exports.remove = exports.update = exports.getAll = exports.create = void 0;
+exports.search = exports.remove = exports.update = exports.getOne = exports.getAll = exports.create = void 0;
 var underscore_1 = __importDefault(require("underscore"));
 var register_model_1 = __importDefault(require("../models/register_model"));
 exports.create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -96,17 +96,16 @@ exports.getAll = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
-exports.update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, body, data, error_3;
+exports.getOne = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, data, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                body = underscore_1.default.pick(req.body, 'matricula', 'codigo', 'paciente', 'empresa', 'numero_patronal', 'recetas', 'labs', 'rx', 'consultorio');
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, register_model_1.default.findByIdAndUpdate(id, body, { new: true })];
+                return [4 /*yield*/, register_model_1.default.findById(id).exec()];
             case 2:
                 data = _a.sent();
                 res.json({
@@ -125,16 +124,17 @@ exports.update = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
-exports.remove = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, data, error_4;
+exports.update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, body, data, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
+                body = underscore_1.default.pick(req.body, 'matricula', 'codigo', 'paciente', 'empresa', 'numero_patronal', 'recetas', 'labs', 'rx', 'consultorio');
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, register_model_1.default.findByIdAndRemove(id)];
+                return [4 /*yield*/, register_model_1.default.findByIdAndUpdate(id, body, { new: true })];
             case 2:
                 data = _a.sent();
                 res.json({
@@ -153,8 +153,36 @@ exports.remove = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
+exports.remove = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, data, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, register_model_1.default.findByIdAndRemove(id)];
+            case 2:
+                data = _a.sent();
+                res.json({
+                    ok: true,
+                    data: data
+                });
+                return [3 /*break*/, 4];
+            case 3:
+                error_5 = _a.sent();
+                res.status(400).json({
+                    ok: false,
+                    error: error_5
+                });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
 exports.search = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var term, regexp, dataByPaciente, dataByMatricula, data, sinrepeditos, error_5;
+    var term, regexp, dataByPaciente, dataByMatricula, data, sinrepeditos, error_6;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -180,10 +208,10 @@ exports.search = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 });
                 return [3 /*break*/, 5];
             case 4:
-                error_5 = _a.sent();
+                error_6 = _a.sent();
                 res.status(400).json({
                     ok: false,
-                    error: error_5
+                    error: error_6
                 });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
